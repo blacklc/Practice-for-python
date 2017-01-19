@@ -25,3 +25,6 @@ arr2=[1,2,3,4,5,6]
 arr1.append(arr2)
 print 'after add other list,the list member is',arr1
 print  'the arr2[0]=',arr1[3][0],'\n'
+print arr1
+arr2.extend(arr1)
+print arr2
