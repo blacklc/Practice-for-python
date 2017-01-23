@@ -23,3 +23,6 @@ son2._printinfo()
 son2.add_number(5)
 print 'after add number,number is',
 son2._printinfo()
+
+#输出指定对象的所有属性和方法
+print '\n',dir(class1)

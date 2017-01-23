@@ -28,3 +28,16 @@ print  'the arr2[0]=',arr1[3][0],'\n'
 print arr1
 arr2.extend(arr1)
 print arr2
+
+#列表解析
+test=[x ** 2 for x in range(5)] #**表示乘方
+for t in test:
+    print t,
+test=[x ** 2 for x in range(5) if x % 2]
+print '\n','只输出奇数:',
+for t in test:
+    print t,
+test=[x ** 2 for x in range(5) if not x % 2]
+print '\n','只输出偶数:',
+for t in test:
+    print t,
