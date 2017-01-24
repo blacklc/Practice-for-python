@@ -69,11 +69,12 @@ def readFile():
         print 'file open error:',e
         return None
     for output in file.readlines():
-        print output,
+        print output.rstrip()
+        #print output,
     file.close()
     
 if __name__ == '__main__':
-    makeFile()
+    #makeFile()
     readFile()
     
     
