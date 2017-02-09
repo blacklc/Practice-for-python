@@ -76,9 +76,9 @@ teststr3=teststr2
 #字符串切割
 teststr4='post1,post2,post3'
 cutlist=teststr4.split(',')
-print '按逗号切割后为',
+print '按逗号切割后为',cutlist,type(cutlist)
 for cutcontent in cutlist:
-    print '"',cutcontent,'"',
+    print '"',cutcontent,'"'
 teststr5='this is a test string'
 cutlist1=teststr5.split('a')
 print '\n'+'按某一字符串切割后为',

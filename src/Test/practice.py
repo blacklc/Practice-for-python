@@ -9,6 +9,7 @@ import random
 import sys
 
 from types import IntType,LongType,FloatType,ComplexType
+from string import Template
 
 if -1<0:
     print (1 + 2 * 4)
@@ -374,7 +375,7 @@ def payment(balance,paid):
     :return 
     """
     print 'Pymt#','Pald','Balance'
-    print '-----','------','---------'
+    print '-' * 5,'-' * 6,'-' * 9 #*表示重复
     mouth = 0
     while balance >= paid:
         if mouth == 0:
@@ -397,8 +398,8 @@ def random_list(rand_list):
     
     :return None
     """
-    #list_len = random.randint(2,100) #randint的范围为左闭右闭
-    while len(rand_list) <= random.randint(2,100):
+    list_len = random.randint(2,100) #randint的范围为左闭右闭
+    while len(rand_list) <= list_len:
         rand_list.append(random.uniform(0,(2**31)-1))
 
 def getElement_from_RandomList(random_list):
@@ -411,8 +412,9 @@ def getElement_from_RandomList(random_list):
     
     :return child_list 返回子集
     """
-    #childList_len = random.randint(1,100)
-    chlid_list = [ random_list[random.randrange(len(random_list))] for n in range(random.randint(1,100))]
+    childList_len = random.randint(1,100)
+    randomlist_len = len(random_list)
+    chlid_list = [ random_list[random.randrange(randomlist_len)] for n in range(childList_len)]
     chlid_list.sort()
     return chlid_list
 
@@ -435,15 +437,23 @@ i = -1
 for i in range(-1,-len(s),-1):
     print s[:i],i
 
+print '''sdkfjl:sdfks
+djflks'''
 
+print '%(test)s' % {'test':'test map'}
 
+tem_str = Template('This is a ${word} test ${word2}.') #字符串模版;除了字符串格式化输出的另一种字符串输出操作
+print tem_str.substitute(word='string.template',word2='string')
 
+print chr(65) #返回对应ASCII码对应的字符
+print unichr(300) #返回对应的unicode码对应字符
 
+print ord('A') #返回对应ASCII字符串或unicode对象
 
-
-
-
-
+str_test = 'test'
+join_list = range(10)
+print join_list
+print str_test.join(repr(join_list))
 
 
 
