@@ -455,7 +455,9 @@ join_list = range(10)
 print join_list
 print str_test.join(repr(join_list))
 
-
+print join_list
+for i in reversed(join_list):
+    print i,
 
 
 
