@@ -57,7 +57,7 @@ print '前导空白为',cutstr1
 cutstr2=teststr.rstrip()
 print '后导空白为',cutstr2
 cutstr3=teststr.strip()
-print '中间的所有空白',cutstr3
+print '同时调用lstrip()和rstrip()',cutstr3
 
 #删除字符串中的指定内容
 teststr2='<teststr>'

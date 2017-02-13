@@ -3,9 +3,11 @@
 
 from __future__ import division
 
+import keyword
 import math
 import re
 import random
+import string
 import sys
 
 from types import IntType,LongType,FloatType,ComplexType
@@ -16,31 +18,31 @@ if -1<0:
 else:
     print "@@@@@@"
 
-str='teststirng'
+str1='teststirng'
 n=0
-while n<len(str):
-    print str[n],
+while n<len(str1):
+    print str1[n],
     n += 1
 print ''
-for s in str:
+for s in str1:
     print s,
     
 sum=0
-list=[1,2,3,4,6]
-for num in list:
+list1=[1,2,3,4,6]
+for num in list1:
     sum += num
 print '\n',sum
 
 sum=0
 n=0
-while n < len(list):
-    sum += list[n]
+while n < len(list1):
+    sum += list1[n]
     n += 1
 print sum
 
 #除法 /：不四舍五入;如果计算结果为float型，会 计算小数点后数值。两个除数里只有有一个是float型，计算结果就为float型.
 #除法 //:四舍五入
-avg = float(sum) / len(list)
+avg = float(sum) / len(list1)
 print avg,type(avg)
 
 n=72
@@ -430,7 +432,7 @@ print rand_list[1:4] #切片是左闭右开，切片的范围是用序列索引�
 
 mlist = range(-5,-1)
 mlist.insert(0,None) #注意list的大部分方法返回的都是None;即方法是对原list进行操作，方法本身并不返回list
-print mlist
+print mlist[:None] #当不提供索引值或索引值为None时，切片返回整个字符串
 
 s = 'abcde'
 i = -1
@@ -446,7 +448,7 @@ tem_str = Template('This is a ${word} test ${word2}.') #字符串模版;除了�
 print tem_str.substitute(word='string.template',word2='string')
 
 print chr(65) #返回对应ASCII码对应的字符
-print unichr(300) #返回对应的unicode码对应字符
+print unichr(300) #返回对应的unicode码对应字符z
 
 print ord('A') #返回对应ASCII字符串或unicode对象
 
@@ -455,9 +457,81 @@ join_list = range(10)
 print join_list
 print str_test.join(repr(join_list))
 
-print join_list
+print join_list,
 for i in reversed(join_list):
     print i,
+
+strlist = ['test','test']
+print '\n',strlist.pop()
+print `strlist.pop()`
+
+t_test = (['xyz',123],23,-103.4)
+t_list = list(t_test)
+print id(t_test),id(t_list)
+#t_string = str(t_test)
+#print t_string
+
+alphas = string.letters +'_' #大小写字母再加上下划线
+nums = string.digits #所有阿拉伯数字
+
+def idcheck(check_string):
+    """
+    标示符合法性检查
+    
+    :param  check_string
+            待检查字符串
+    :type   string
+    
+    :return boolean True 合法 False 存在非法标示符
+    """
+    alphas = string.letters +'_' #大小写字母再加上下划线
+    nums = string.digits #所有阿拉伯数字
+    kw = keyword.kwlist #所有关键字
+    
+    cs_length = len(check_string)
+    if cs_length >= 1:
+        #判断是否以字母或下划线开头
+        if check_string[0] not in alphas: return False
+        #判断是否存在关键字
+        elif check_string in kw: return False
+        #判断是否有特殊字符
+        else:
+            for otherchar in check_string[1:]:
+                if otherchar and (otherchar not in alphas + nums): return False
+            else: return True
+
+if idcheck('7'):
+    print 'ok' 
+else:
+    print 'no'
+    
+n_list = [random.randint(1,9) for i in range(10)]
+print 'old:',n_list
+n_list2 = n_list[:]
+n_list.sort(reverse=True) #列表倒序排列:从大到小
+print 'new:',n_list   
+n_list2 = [str(n) for n in n_list2]         
+n_list = [n for n in sorted(n_list2,reverse=True)] #按字典序排序：按ASCII码从大到小
+print 'new with ascii:',n_list
+
+string = 'teststring'
+n = 0
+s_l = len(string)
+while n <= s_l:
+    print string[n-1:n+2].strip()
+    n += 1
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
