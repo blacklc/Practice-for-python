@@ -514,13 +514,147 @@ n_list2 = [str(n) for n in n_list2]
 n_list = [n for n in sorted(n_list2,reverse=True)] #按字典序排序：按ASCII码从大到小
 print 'new with ascii:',n_list
 
-string = 'teststring'
+string11 = 'teststring'
 n = 0
-s_l = len(string)
+s_l = len(string11)
 while n <= s_l:
-    print string[n-1:n+2].strip()
+    print string11[n-1:n+2].strip()
     n += 1
 
+def cmp_by_scan(string1,string2):
+    """
+    通过扫描字符串方式匹配字符串
+    
+    :param  string1
+            待比较字符串
+    :type   string
+    
+    :param  string2
+            待比较字符串
+    :type   string
+    
+    :return boolean True 匹配成功；False 匹配失败
+    """
+    if len(string1) != len(string2):
+        return False
+    for i,string1_member in enumerate(string1):
+        if i != string2.find(string1_member):
+            return False
+    return True
+
+if cmp_by_scan("123Abcd", "123Abcd"):
+    print 'same'
+else:
+    print 'different'
+
+def everse_string(str):
+    """
+    接受一个字符，并在其后加入一个反向拷贝，构成一个回文字符串
+    
+    :param  str
+            待反转字符串
+    :type   string
+    
+    :return string 返回一个回文字符串
+    """
+    return ''.join((str,str[-1::-1]))
+
+print everse_string('abcdf')
+
+fac = range(1,5)
+print 'fac'
+
+def search_reciprocal_number(num):
+    """
+    查找一个数的互质数
+    
+    :param  num
+    :type   int
+    
+    :return list 互质数列表
+    """
+    if num % 2 == 0:
+        fac_list = range(1,num+1)
+        i = 0
+        while i < len(fac_list):
+            if num % fac_list[i] == 0:
+                del fac_list[i]
+            else:
+                i += 1
+        return fac_list
+    else:
+        return [1,num]
+
+print search_reciprocal_number(30)
+
+def num_to_eng(num):
+    """
+    给出一个整型值返回代表该值的英文
+    
+    :param  num(0~1000)
+            待翻译的整型值
+    :type   int
+    
+    :return string 整型的英文表示
+    """
+    digits = ['one','two','there','four','five','six','seven','eight','nine']
+    ten_digits = ['ten','twenty','thrity','fourty','fivty','sixty','seventy','eighty','ninty']
+    if 100 <= num < 1000:
+        hundred_tuple = divmod(num,100)
+        ten_tuple = divmod(hundred_tuple[1],10)
+        hundred_digits_index = hundred_tuple[0] - 1
+        ten_digits_index = ten_tuple[0] - 1
+        digits_index = ten_tuple[1] - 1
+        return '%s hunderd-%s-%s' %(digits[hundred_digits_index],ten_digits[ten_digits_index],digits[digits_index])
+    elif 10 <= num <100:
+        ten_tuple = divmod(num,10)
+        ten_digits_index = ten_tuple[0] - 1
+        digits_index = ten_tuple[1] - 1
+        return '%s-%s' %(ten_digits[ten_digits_index],digits[digits_index])
+    elif 0 < num < 10:
+        digits_index = num - 1
+        return '%s' %(digits[digits_index])
+    else:
+        return 'Error:"num must between 0~1000"'
+    
+print num_to_eng(847)
+            
+def min_to_hourMin(min):        
+    """
+    将分钟转换成小时分钟表现形式
+    
+    :param  min
+            分钟数
+    :type   int
+    
+    :return string 返回时间的小时分钟表现形式
+    """
+    hour_min_tuple = divmod(min,60)
+    return '%02d:%02d' %(hour_min_tuple[0],hour_min_tuple[1])
+
+print min_to_hourMin(90)
+
+def int_to_ipaddress(ip_num):
+    """
+    整型到IP地址格式换
+    
+    :param  ip_num
+            需转换的整型
+    :type   int
+    
+    :return string ip address
+    """
+    if 1000 <= ip_num <= 255255255255:
+        ip_str = repr(ip_num)
+        ip_length = len(ip_str)
+        ip_tuple = divmod(ip_length,4)
+        print ip_tuple
+        ipaddress_str = ''
+        print ip_str[0:ip_tuple[0]*4:3],ip_str[ip_length-ip_tuple[1]-1:]
+        ipaddress_str.join((ip_str[0:ip_tuple[0]*4:3],ip_str[ip_length-ip_tuple[1]-1:]))
+        return ipaddress_str
+
+print int_to_ipaddress(255255255255)
 
 
 
@@ -544,6 +678,9 @@ while n <= s_l:
 
 
 
+
+
+        
 
 
 
