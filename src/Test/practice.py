@@ -648,31 +648,161 @@ def int_to_ipaddress(ip_num):
         ip_str = repr(ip_num)
         ip_length = len(ip_str)
         ip_tuple = divmod(ip_length,4)
-        print ip_tuple
         ipaddress_str = ''
-        print ip_str[0:ip_tuple[0]*4:3],ip_str[ip_length-ip_tuple[1]-1:]
-        ipaddress_str.join((ip_str[0:ip_tuple[0]*4:3],ip_str[ip_length-ip_tuple[1]-1:]))
+        str_tag = 0
+        for i in range(ip_tuple[0]):
+            ipaddress_str = '%s%s.' % (ipaddress_str,ip_str[str_tag:str_tag+3])
+            str_tag += 3
+        ipaddress_str = ''.join((ipaddress_str,ip_str[str_tag:]))
+        if ipaddress_str.endswith('.'):
+            ipaddress_str = ipaddress_str[:len(ipaddress_str)-1]
         return ipaddress_str
 
-print int_to_ipaddress(255255255255)
+print int_to_ipaddress(172168182192)
 
+def ipaddress_to_int(ip_str):
+    """
+    IP地址格式到整型转换
+    
+    :param  ip_num
+            需转换的IP地址字符串
+    :type   string
+    
+    :return int ip address
+    """
+    return int(ip_str[0:3])*(10**9)+int(ip_str[4:7])*(10**6)+int(ip_str[8:11])*(10**3)+int(ip_str[12:])
 
+print ipaddress_to_int('172.168.123.132')
 
+def findchr(str,chr):
+    """
+    自实现string.find()函数(单一字符版)
+    
+    :param  str
+            被搜索字符串
+    :type   string
+    
+    :param  chr
+            被查找字符
+    :type   char
+    
+    :return char_index 若查找到，则返回字符的索引；若未查找到则返回-1
+    """
+    char_index = -1
+    for i,c in enumerate(str):
+        if c == chr:
+            char_index = i
+            break
+    return char_index
 
+print findchr('string', 'a')
 
+def findstr(str1,str2):
+    """
+    自实现string.find()函数
+    
+    :param  str1
+            被搜索字符串
+    :type   string
+    
+    :param  str2
+            被查找字符串
+    :type   string
+    
+    :return str_index 若查找到，则返回字符串的首索引；若未查找到则返回-1
+    
+    """
+    str_index = -1
+    i = 0
+    y = findchr(str1[0:], str2[i])
+    str2_len = len(str2)
+    while y != -1:
+        if i+1 == str2_len or findchr(str1[y:str2_len+1], str2[i]) != 0:
+            break
+        i += 1
+        y += 1
+    if i+1 == str2_len:
+        str_index = y-(str2_len-1)
+    return str_index     
 
+print findstr('string', 'rin')            
 
+def rfindchr(str,chr):
+    """
+    自实现string.rfind()函数
+    
+    :param  str
+            被搜索字符串
+    :type   string
+    
+    :param  chr
+            被查找字符
+    :type   char
+    
+    :return index 若查找到，则返回字符的索引；若未查找到则返回0
+    """
+    char_index = 0
+    for i in range(-1,-len(str)-1,-1):
+        if chr == str[i]:
+            char_index = i
+            break
+    return char_index
 
+print rfindchr('string', 'a')
 
+def subchf(str,origchar,newchar):
+    """
+    查找字符;若存在，则将其替换成指定字符
+    
+    :param  str
+            被搜索字符串
+    :type   string
+    
+    :param  origchar
+            被查找字符
+    :type   char 
+    
+    :param  newchar
+            替换字符
+    :type   char   
+    
+    :return string 返回修改过后的字符串 
+    """
+    for i,c in enumerate(str):
+        if c == origchar:
+            str = ''.join((str[0:i],newchar,str[i+1:]))
+    return str
 
+print subchf('aaabbb','a','c')
 
+def atoc(complex_str):
+    """
+    字符串转复数类型
+    
+    :param  complex_str
+            复数对应的字符串表达
+    :type   string
+    
+    :return complex 字符串转换的复数类型
+    """
+    #对应情况：只有实数部分
+    if 'j' not in complex_str:
+        return complex(float(complex_str))
+    else:
+        c_str = complex_str.split('j')
+        #对应情况：标准形式；-5.67e-8j-1.23e+4
+        if '' not in c_str:
+            return complex(float(c_str[1]),float(c_str[0]))
+        #对应情况：标准形式；-1.23e+4-5.67e-8j
+        else:
+            re_string = r'(?P<real>[+-].*?\.*?e[+-].*?)(?P<imag>[+-].*?)j'
+            pattern = re.compile(re_string) #将正则表达式编译成pattern对象
+            result = re.match(pattern, complex_str)  
+            print result.groupdict()
+            return complex(float(result.groupdict()['real']),float(result.groupdict()['imag']))
 
-
-
-
-
-
-
+print atoc('-1.23e+4-5.67e-8j')
+print atoc('-5.67e-8j-1.23e+4')
 
 
 
@@ -681,6 +811,16 @@ print int_to_ipaddress(255255255255)
 
 
         
+
+
+
+
+
+
+
+
+
+
 
 
 
