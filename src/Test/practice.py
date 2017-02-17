@@ -10,6 +10,7 @@ import random
 import string
 import sys
 
+from datetime import datetime,date
 from types import IntType,LongType,FloatType,ComplexType
 from string import Template
 
@@ -804,13 +805,96 @@ def atoc(complex_str):
 print atoc('-1.23e+4-5.67e-8j')
 print atoc('-5.67e-8j-1.23e+4')
 
+def rochambeau(selection):
+    """
+    剪刀石头布；玩家与机器互比
+    
+    :param  selection
+            玩家选项
+    :type   string
+    
+    :return None
+    """
+    cmp_result = cmp(selection,random.choice(('scissor','paper','stone')))
+    if cmp_result > 0:
+        print 'Player win'
+    elif cmp_result <0:
+        print 'Com win'
+    else:
+        print 'Tie'
 
-
-
-
-
-
+rochambeau('scissor')
         
+def countdays(day1,day2):
+    """
+    计算两个日期的相差天数;日期格式:DD/MM/YY
+    
+    :param  day1
+            日期1
+    :type   string
+    
+    :param  day2
+            日期2
+    :type   string
+    
+    :return days 两个日期相差天数
+    """
+    day1_list = [int(str) for str in day1.split('/')]
+    day2_list = [int(str) for str in day2.split('/')]
+    d1 = datetime(day1_list[2],day1_list[1],day1_list[0])
+    d2 = datetime(day2_list[2],day2_list[1],day2_list[0])
+    return (d1-d2).days
+
+print countdays('14/12/2016', '01/12/2015')
+
+def live_days(birth_date):
+    """
+    计算某人到目前为止活过的总天数
+    
+    :param  birth_date
+            出生日期;日期格式:DD/MM/YY
+    :type   string        
+    
+    :return days
+    """
+    birthdate_list = [int(str) for str in birth_date.split('/')]
+    birthdate = datetime(birthdate_list[2],birthdate_list[1],birthdate_list[0])
+    nowtime = datetime.now()
+    return (nowtime-birthdate).days
+    
+print live_days('08/04/1992')
+
+def next_birthday(birth_date):
+    """
+    计算某人从当前时间起，距离下一次生日的天数
+    
+    :param  birth_date
+            出生日期;日期格式:DD/MM/YY
+    :type   string        
+    
+    :return days
+    """
+    birthdate_list = [int(str) for str in birth_date.split('/')]
+    nowtime = datetime.now()
+    #当前月份小于出生月份
+    if nowtime.month <= birthdate_list[1]:
+        nextbirthday_time = datetime(nowtime.year,birthdate_list[1],birthdate_list[0])
+    else:
+        nextbirthday_time = datetime(nowtime.year+1,birthdate_list[1],birthdate_list[0])
+    return (nextbirthday_time-nowtime).days
+
+print next_birthday('08/04/1992')
+
+
+
+
+
+
+
+
+
+
+
 
 
 
